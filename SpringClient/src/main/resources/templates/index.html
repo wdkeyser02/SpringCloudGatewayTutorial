@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Spring Boot Tutorial</title>
+<script>
+	async function load() {
+		console.log("Function Load")
+		let url ="http://localhost:8090/";
+		try {
+			let response = await fetch(url + "resource1/");
+			let text = await response.text();
+			document.getElementById("text01").innerHTML = text;
+			console.log(response);
+			console.log(text);
+			
+		} catch {
+			document.getElementById("text01").innerHTML = "ERROR resource1";
+		}
+		
+		try {
+			response = await fetch(url + "resource2/");
+			text = await response.text();
+			document.getElementById("text02").innerHTML = text;
+			console.log(response);
+			console.log(text);
+			
+		} catch {
+			document.getElementById("text02").innerHTML = "ERROR resource2";
+		}
+		
+	}
+</script>
+</head>
+<body>
+<h1>Spring Boot Tutorial</h1>
+<h2>Spring Cloud Gateway</h2>
+<p th:text="${text}"></p>
+<p> </p>
+<h2>RESTTEMPLATE</h2>
+<p> </p>
+<p th:text="${quote1}"></p>
+<p> </p>
+<p th:text="${quote2}"></p>
+<p> </p>
+<p>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</p>
+<h2>FETCH</h2>
+<p> </p>
+<p id="text01"></p>
+<p> </p>
+<p id="text02"></p>
+<p> </p>
+<button onclick="load()">Click</button>
+</body>
+</html>
