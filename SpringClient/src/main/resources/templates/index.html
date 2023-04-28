@@ -29,6 +29,17 @@
 			document.getElementById("text02").innerHTML = "ERROR resource2";
 		}
 		
+		try {
+			response = await fetch(url + "gateway");
+			text = await response.text();
+			document.getElementById("text03").innerHTML = text;
+			console.log(response);
+			console.log(text);
+			
+		} catch {
+			document.getElementById("text03").innerHTML = "ERROR gateway";
+		}
+		
 	}
 </script>
 </head>
@@ -43,12 +54,16 @@
 <p> </p>
 <p th:text="${quote2}"></p>
 <p> </p>
+<p th:text="${quote3}"></p>
+<p> </p>
 <p>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</p>
 <h2>FETCH</h2>
 <p> </p>
 <p id="text01"></p>
 <p> </p>
 <p id="text02"></p>
+<p> </p>
+<p id="text03"></p>
 <p> </p>
 <button onclick="load()">Click</button>
 </body>

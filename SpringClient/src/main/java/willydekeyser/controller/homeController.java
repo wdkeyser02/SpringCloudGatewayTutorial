@@ -14,9 +14,12 @@ public class homeController {
 				"http://localhost:8090/resource1/", String.class);
 		String quote2 = restTemplate.getForObject(
 				"http://localhost:8090/resource2/", String.class);
+		String quote3 = restTemplate.getForObject(
+				"http://localhost:8090/gateway", String.class);
 		model.addAttribute("text", "Spring Client");
 		model.addAttribute("quote1", quote1);
 		model.addAttribute("quote2", quote2);
+		model.addAttribute("quote3", quote3);
 		return "index";
 	}
 }

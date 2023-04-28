@@ -1,17 +1,15 @@
 server:
   port: 8090
   
+logging:
+  level:
+    org.springframework.security: TRACE
+
 spring:
   cloud:
     gateway:
-      globalcors:
-           corsConfigurations:
-             '[/**]':
-               allowedOrigins:
-                 - http://localhost:8080
-                 - http://127.0.0.1:8080
-               allowedMethods:
-                 - GET
+      default-filters:
+        - TokenRelay=
       routes:
         - id: route1
           uri: http://localhost:8091/
@@ -25,3 +23,18 @@ spring:
             - Path=/resource2/**
           filters:
             - SetPath=/resourceserver02/
+            
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: spring
+            client-id: client
+            client-secret: secret
+            scope: openid
+            authorization-grant-type: authorization_code
+            redirect-uri: http://127.0.0.1:8090/login/oauth2/code/{registrationId}
+        provider:
+          spring:
+            issuer-uri: http://localhost:9000
